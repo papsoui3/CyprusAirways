@@ -1,0 +1,132 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Basket Title -->
+    <TextView
+        android:id="@+id/textViewBasketTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Basket"
+        android:textSize="26sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:paddingBottom="8dp"
+        android:fontFamily="sans-serif-medium"/>
+
+    <!-- Basket Items RecyclerView -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/white">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewBasket"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"/>
+    </androidx.cardview.widget.CardView>
+    <!-- Total Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="16dp">
+
+        <!-- Total Label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total:"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="sans-serif-medium"/>
+
+        <!-- Total Amount -->
+        <TextView
+            android:id="@+id/textViewTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$0.00"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Payment Options Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="12dp">
+
+        <!-- Visa Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonVisa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Visa"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            app:cornerRadius="30dp"
+            app:backgroundTint="@color/blue"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/white"
+            android:paddingVertical="14dp"
+            android:elevation="6dp"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Cash Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonCash"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cash"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            app:cornerRadius="30dp"
+            app:backgroundTint="@color/green"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/white"
+            android:paddingVertical="14dp"
+            android:elevation="6dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+    </LinearLayout>
+
+    <!-- Go Back Button - Full Width for Better UX -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonGoBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go Back"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:cornerRadius="30dp"
+        app:backgroundTint="@color/dark_gray"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/white"
+        android:paddingVertical="14dp"
+        android:elevation="6dp"
+        android:layout_marginTop="12dp"/>
+
+
+</LinearLayout>

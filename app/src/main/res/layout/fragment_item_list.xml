@@ -1,0 +1,58 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Tabs -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayoutCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="@color/black"
+        app:tabMode="scrollable" />
+
+    <!-- ViewPager2 for Fragment Swiping -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerItems"
+        android:layout_width="match_parent"
+        android:layout_height="518dp"
+        android:layout_weight="1" />
+
+    <!-- Basket Section at the bottom -->
+    <LinearLayout
+        android:id="@+id/basketLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f8f8f8"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <Button
+            android:id="@+id/buttonChoosePassenger"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose Passenger"
+            android:textSize="18sp"
+            app:cornerRadius="24dp"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@color/cyprus_secondary"
+            android:layout_marginTop="16dp" />
+        <!-- FloatingActionButton for Basket -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabBasket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shoppingcart"
+            app:backgroundTint="@color/cyprus_secondary"
+            app:tint="@android:color/white"
+            android:contentDescription="Basket"
+            android:layout_gravity="center"
+            android:layout_margin="16dp" />
+        <!-- "Choose Passenger" Button -->
+
+    </LinearLayout>
+
+
+</LinearLayout>

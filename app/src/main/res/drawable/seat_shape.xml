@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="@android:color/transparent"/>  <!-- Transparent background -->
+    <stroke android:width="3dp" android:color="#9BC7C4"/>  <!-- Light teal outline -->
+    <corners android:radius="12dp"/>  <!-- Slightly rounded corners -->
+    <size android:width="54dp" android:height="54dp"/>  <!-- Fixed seat size -->
+</shape>

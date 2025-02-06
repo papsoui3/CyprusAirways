@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#BDBDBD</color>
+    <color name="blue">#2196F3</color><color name="green">#28A745</color>
+    <color name="dark_gray">#333333</color>
+    <color name="cyprus_primary">#0F3D2E</color>  <!-- Dark Teal -->
+    <color name="cyprus_secondary">#2E5545</color>  <!-- Soft Green -->
+    <color name="cyprus_accent">#A6C48A</color>  <!-- Light Olive -->
+    <color name="cyprus_text">#2E3D49</color>  <!-- Dark Gray for text -->
+    <color name="cyprus_background">#E9F1F4</color>  <!-- Light Grayish Blue -->
+    <color name="aisle_color">#F5F5F5</color>  <!-- Light Gray for aisles -->
+    <color name="seat_text">#FFFFFF</color>
+    <color name="seat_background">#A6C48A</color> <!-- White for seat numbers -->
+
+</resources>
