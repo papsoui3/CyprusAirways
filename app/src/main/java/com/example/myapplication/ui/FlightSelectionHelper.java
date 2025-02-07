@@ -18,7 +18,6 @@ public class FlightSelectionHelper {
     private Spinner spinnerFlight;
     private EditText editTextDate;
 
-    // Constructor to initialize UI components
     public FlightSelectionHelper(Context context, Spinner spinnerFlight, EditText editTextDate) {
         this.context = context;
         this.spinnerFlight = spinnerFlight;
@@ -27,7 +26,6 @@ public class FlightSelectionHelper {
         setupDatePicker();
     }
 
-    // Method to populate the flight spinner
     private void setupFlightSpinner() {
         String[] flightNumbers = {"CY101", "CY202", "CY303", "CY404", "CY505"};
 
@@ -47,12 +45,10 @@ public class FlightSelectionHelper {
         });
     }
 
-    // Method to handle the date picker
     private void setupDatePicker() {
         editTextDate.setOnClickListener(v -> showDatePicker());
     }
 
-    // Show date picker dialog
     private void showDatePicker() {
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);

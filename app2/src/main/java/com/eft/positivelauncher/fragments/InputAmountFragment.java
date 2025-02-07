@@ -21,6 +21,7 @@ import com.eft.libpositive.PosIntegrate;
 import com.eft.positivelauncher.TransactionResponse;
 import com.eft.positivelauncher.activities.MainActivity;
 import com.eft.positivelauncher.weblink.WebLinkIntegrate;
+import com.eft.libpositive.PosIntegrate.TRANSACTION_TYPE;
 
 import static com.eft.libpositive.PosIntegrate.CONFIG_TYPE.CT_AMOUNT_CASHBACK;
 import static com.eft.libpositive.PosIntegrate.CONFIG_TYPE.CT_LANGUAGE;
@@ -146,7 +147,9 @@ public class InputAmountFragment extends Fragment {
 
                     switch (trans_Type) {
                         case SALE:
-                            PosIntegrate.executeTransaction(getActivity(), TRANSACTION_TYPE_SALE, args);
+                            TRANSACTION_TYPE transType = TRANSACTION_TYPE.getTransType("SaleAuto");
+
+                            PosIntegrate.executeTransaction(getActivity(), transType, args);
                             break;
                         case REFUND:
                             PosIntegrate.executeTransaction(getActivity(), TRANSACTION_TYPE_REFUND, args);

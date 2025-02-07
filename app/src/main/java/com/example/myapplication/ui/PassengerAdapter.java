@@ -34,16 +34,15 @@ public class PassengerAdapter extends RecyclerView.Adapter<PassengerAdapter.Pass
     public void onBindViewHolder(@NonNull PassengerViewHolder holder, int position) {
         String passenger = passengerList.get(position);
         holder.passengerButton.setText(passenger);
-        if (passenger.equals("")) { // This is an aisle space
-            holder.passengerButton.setBackgroundColor(holder.itemView.getContext().getColor(R.color.cyprus_background));// Set aisle color to white
-            holder.passengerButton.setEnabled(false); // Disable clicking for aisles
-            holder.passengerButton.setVisibility(View.VISIBLE); // Keep aisle visible
-            holder.passengerButton.setText(""); // Remove text for aisles
+        if (passenger.equals("")) {
+            holder.passengerButton.setBackgroundColor(holder.itemView.getContext().getColor(R.color.cyprus_background));
+            holder.passengerButton.setEnabled(false);
+            holder.passengerButton.setVisibility(View.VISIBLE);
+            holder.passengerButton.setText("");
         } else {
             holder.passengerButton.setText(passenger);
-            holder.passengerButton.setBackgroundColor(holder.itemView.getContext().getColor(R.color.seat_background)); // Keep seats blue
+            holder.passengerButton.setBackgroundColor(holder.itemView.getContext().getColor(R.color.seat_background));
 
-            // Handle click event
             holder.passengerButton.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.onPassengerClick(passenger);
@@ -67,7 +66,6 @@ public class PassengerAdapter extends RecyclerView.Adapter<PassengerAdapter.Pass
         }
     }
 
-    // Define an interface for click handling
     public interface OnPassengerClickListener {
         void onPassengerClick(String passenger);
     }

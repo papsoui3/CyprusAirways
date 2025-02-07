@@ -1,6 +1,5 @@
 package com.example.myapplication.ui;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
     }
     public void refreshBasket() {
         this.basketItems = BasketManager.getInstance().getBasketItems();
-        notifyDataSetChanged(); // Refreshes the entire list
+        notifyDataSetChanged();
     }
 
 
@@ -58,7 +57,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
         holder.buttonIncrease.setOnClickListener(v -> {
             int newQuantity = quantity + 1;
             BasketManager.getInstance().addItem(itemName, newQuantity);
-            notifyItemChanged(position);  // Update only the affected item
+            notifyItemChanged(position);
             listener.onQuantityChange(itemName, newQuantity);
         });
 
@@ -71,32 +70,31 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
             } else {
                 BasketManager.getInstance().removeItem(itemName);
                 notifyItemRemoved(position);
-                notifyItemRangeChanged(position, basketItems.size());  // Update list
+                notifyItemRangeChanged(position, basketItems.size());
 
             }
         });
         // Handle delete button click
         holder.imageViewDelete.setOnClickListener(v -> {
             BasketManager.getInstance().removeItem(itemName);
-            basketItems.remove(itemName);  // Remove item from the local basketItems map
-            notifyItemRemoved(position);  // Remove item from RecyclerView
-            notifyItemRangeChanged(position, basketItems.size());  // Update list after removal
+            basketItems.remove(itemName);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, basketItems.size());
         });
         
     }
-
     private double getPriceForItem(String itemName) {
         switch (itemName) {
             case "Coke":
-                return 2;  // Add actual drawable resource
+                return 2;
             case "Juice":
-                return 3;  // Add actual drawable resource
+                return 3;
             case "Water":
                 return 1.5;
             case "Pepsi":
                 return 4;
             default:
-                return 0;  // Default image
+                return 0;
         }
     }
 
@@ -117,12 +115,10 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
             textViewQuantity = itemView.findViewById(R.id.textViewQuantity);
             buttonIncrease = itemView.findViewById(R.id.buttonIncrease);
             buttonDecrease = itemView.findViewById(R.id.buttonDecrease);
-            imageViewItem = itemView.findViewById(R.id.imageViewItem);  // Ensure correct ID
-            imageViewDelete = itemView.findViewById(R.id.imageViewDelete);  // Ensure correct ID
+            imageViewItem = itemView.findViewById(R.id.imageViewItem);
+            imageViewDelete = itemView.findViewById(R.id.imageViewDelete);
         }
     }
-
-
     public interface OnItemClickListener {
         void onQuantityChange(String itemName, int newQuantity);
         void onItemRemove(String itemName);
