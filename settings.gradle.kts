@@ -31,4 +31,5 @@ dependencyResolutionManagement {
 rootProject.name = "My Application"
 include(":app")
 
-include(":app2")
+///include(":app2")
+///include(":app2")
