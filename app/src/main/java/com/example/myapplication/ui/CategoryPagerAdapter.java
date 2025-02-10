@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class CategoryPagerAdapter extends FragmentStateAdapter {
-
     public CategoryPagerAdapter(@NonNull Fragment fragment) {
         super(fragment);
     }
-
     @NonNull
     @Override
     public Fragment createFragment(int position) {

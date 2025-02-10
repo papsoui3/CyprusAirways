@@ -1,8 +1,5 @@
 package com.example.myapplication.ui;
 
-import static com.eft.libpositive.PosIntegrate.TRANSACTION_TYPE.TRANSACTION_TYPE_SALE;
-import static com.google.android.material.internal.ViewUtils.hideKeyboard;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +13,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.eft.libpositive.PosIntegrate.TRANSACTION_TYPE.*;
 
 import com.eft.libpositive.PosIntegrate;
 import com.example.myapplication.R;
@@ -41,7 +37,6 @@ public class BasketActivity extends AppCompatActivity implements BasketManager.B
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
 
-        // Enable action bar back button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Your Basket");
@@ -55,7 +50,7 @@ public class BasketActivity extends AppCompatActivity implements BasketManager.B
 
         // Initialize the total TextView
         totalTextView = findViewById(R.id.textViewTotal);
-        updateTotal();  // Update the total when the activity is created
+        updateTotal();
 
         basketAdapter = new BasketAdapter(basketItems, new BasketAdapter.OnItemClickListener() {
             @Override
@@ -81,7 +76,7 @@ public class BasketActivity extends AppCompatActivity implements BasketManager.B
             Intent intent = new Intent(this, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
-            finish(); // Ensures BasketActivity is removed from stack
+            finish();
         });
 
         Button buttonVisa = findViewById(R.id.buttonVisa);
@@ -89,70 +84,54 @@ public class BasketActivity extends AppCompatActivity implements BasketManager.B
             launchOtherApp();
         });
 
-        // Set BasketManager listener
         BasketManager.getInstance().setBasketUpdateListener(this);
     }
     private void launchOtherApp() {
-        Log.d("BasketActivity", "🚀 Visa button clicked - Starting Transaction");
+        Log.d("BasketActivity", "Visa button clicked - Starting Transaction");
 
-       // String totalAmountText = totalTextView.getText().toString().replace("$", "").trim();
-        String totalAmountText = "415";
-
-        // Hide Keyboard
+        String totalAmountText = totalTextView.getText().toString().replace("$", "").trim();
+        int totalAmount = (int) (Double.parseDouble(totalAmountText) * 100);
+        String formattedAmount = String.valueOf(totalAmount);
         hideKeyboard();
 
+        Log.d("Total:",formattedAmount);
         // Create argument map for transaction
         HashMap<PosIntegrate.CONFIG_TYPE, String> args = new HashMap<>();
-        args.put(PosIntegrate.CONFIG_TYPE.CT_AMOUNT, totalAmountText);
+        args.put(PosIntegrate.CONFIG_TYPE.CT_AMOUNT, formattedAmount);
         args.put(PosIntegrate.CONFIG_TYPE.CT_LANGUAGE, "en_GB");
 
-        Log.d("BasketActivity", "📤 Transaction Args: " + args.toString());
+        Log.d("BasketActivity", "Transaction Args: " + args.toString());
         if (WebLinkIntegrate.enabled) {
-            Log.d("BasketActivity", "📡 Processing SALE transaction via WebLinkIntegrate...");
-            WebLinkIntegrate.executeTransaction(this, "SALE", args, new TransactionCallback() {
+            Log.d("BasketActivity", "Processing SALE transaction via WebLinkIntegrate...");
+            TRANSACTION_TYPE transType = TRANSACTION_TYPE.getTransType("SaleAuto");
+            WebLinkIntegrate.executeTransaction(this, String.valueOf(transType), args, new TransactionCallback() {
                 @Override
                 public void onTransactionSuccess(JSONObject response) {
-                    Log.d("BasketActivity", "✅ onTransactionSuccess() triggered!");
+                    Log.d("BasketActivity", "onTransactionSuccess() triggered!");
 
                     // Ensure Toast runs on UI thread
                     runOnUiThread(() -> {
-                        Toast.makeText(BasketActivity.this, "🎉 Transaction Successful!", Toast.LENGTH_LONG).show();
-                        Log.d("BasketActivity", "🎉 Toast for Transaction Success should be displayed now!");
+                        Toast.makeText(BasketActivity.this, "Transaction Successful!", Toast.LENGTH_LONG).show();
+                        Log.d("BasketActivity", "Toast for Transaction Success should be displayed now!");
                     });
                 }
                 @Override
                 public void onTransactionFailed(String error) {
-                    Log.e("BasketActivity", "❌ onTransactionFailed() triggered!");
+                    Log.e("BasketActivity", "onTransactionFailed() triggered!");
 
                     runOnUiThread(() -> {
-                        Toast.makeText(BasketActivity.this, "❌ Transaction Failed: " + error, Toast.LENGTH_LONG).show();
-                        Log.e("BasketActivity", "🚨 Toast for Transaction Failure should be displayed now!");
+                        Toast.makeText(BasketActivity.this, "Transaction Failed: " + error, Toast.LENGTH_LONG).show();
+                        Log.e("BasketActivity", "Toast for Transaction Failure should be displayed now!");
                     });
                 }
 
             });
         } else {
-            Log.d("BasketActivity", "📡 Processing SALE transaction via PosIntegrate...");
-            PosIntegrate.executeTransaction(this,TRANSACTION_TYPE_SALE, args);
+            TRANSACTION_TYPE transType = TRANSACTION_TYPE.getTransType("SaleAuto");
+            PosIntegrate.executeTransaction(this, transType, args);
         }
-
-        // Execute SALE transaction with a callback
-
-
         Log.d("BasketActivity", "📩 Transaction request sent");
     }
-
-
-//        Intent intent = new Intent();
-//        intent.setClassName("com.eft.positivelauncher", "com.eft.positivelauncher.activities.MainActivity");
-//
-//        if (intent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(intent, VISA_REQUEST_CODE); // Start Visa app and wait for result
-//        } else {
-//            Toast.makeText(this, "Visa App is not installed!", Toast.LENGTH_LONG).show();
-//        }
-
-
     private void hideKeyboard() {
         View view = getCurrentFocus();
         if (view != null) {
@@ -186,10 +165,10 @@ public class BasketActivity extends AppCompatActivity implements BasketManager.B
         for (Map.Entry<String, Integer> entry : basketItems.entrySet()) {
             String itemName = entry.getKey();
             int quantity = entry.getValue();
-            double price = BasketManager.getInstance().getItemPrice(itemName); // Get item price
-            total += price * quantity; // Calculate total price
+            double price = BasketManager.getInstance().getItemPrice(itemName);
+            total += price * quantity;
         }
-        totalTextView.setText("$" + total); // Update total TextView
+        totalTextView.setText("$" + total);
     }
 
     @Override
@@ -198,7 +177,7 @@ public class BasketActivity extends AppCompatActivity implements BasketManager.B
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
         finish();
-        finish();  // Close the current activity and go back to the previous screen
+        finish();
         return true;
     }
 }

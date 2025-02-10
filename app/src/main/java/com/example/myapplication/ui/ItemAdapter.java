@@ -26,7 +26,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate the item layout (CardView)
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
         return new ItemViewHolder(itemView);
     }
@@ -35,12 +34,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         String itemName = itemList.get(position);
 
-        // Get the quantity for this item directly from BasketManager
         int quantity = BasketManager.getInstance().getBasketItems().getOrDefault(itemName, 0);
 
         holder.itemNameTextView.setText(itemName);
         holder.itemPriceTextView.setText("$" + String.valueOf(getPriceForItem(itemName)));
-        holder.itemQuantityTextView.setText(String.valueOf(quantity));  // Set the quantity from BasketManager
+        holder.itemQuantityTextView.setText(String.valueOf(quantity));
 
         int imageResId = getImageForItem(itemName);
         holder.itemImageView.setImageResource(imageResId);
@@ -58,50 +56,43 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 BasketManager.getInstance().addItem(itemName, newQuantity);
             }
         });
-
     }
-
-
     private double getPriceForItem(String itemName) {
         switch (itemName) {
             case "Coke":
-                return 2;  // Add actual drawable resource
+                return 2;
             case "Juice":
-                return 3;  // Add actual drawable resource
+                return 3;
             case "Water":
                 return 1.5;
             case "Pepsi":
                 return 4;
             default:
-                return 0;  // Default image
+                return 0;
         }
     }
 
-
     @Override
     public int getItemCount() {
-        return itemList.size(); // Return the size of the list
+        return itemList.size();
     }
-    // Method to get image resource ID based on item name
     private int getImageForItem(String itemName) {
         switch (itemName) {
             case "Coke":
-                return R.mipmap.coke;  // Add actual drawable resource
+                return R.mipmap.coke;
             case "Juice":
-                return R.mipmap.juice;  // Add actual drawable resource
+                return R.mipmap.juice;
             case "Water":
                 return R.mipmap.water;
             case "Pepsi":
                 return R.mipmap.pepsi;
             default:
-                return R.mipmap.coke;  // Default image
+                return R.mipmap.coke;
         }
     }
-
     public void refreshQuantities() {
         notifyDataSetChanged();
     }
-
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
         ImageView itemImageView;
         TextView itemNameTextView;
