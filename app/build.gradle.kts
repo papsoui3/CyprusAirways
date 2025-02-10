@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.example.myapplication"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "com.example.myapplication"
         minSdk = 24
@@ -52,9 +52,9 @@ dependencies {
 
     // New dependencies from the first block
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))  // Correct Kotlin syntax for fileTree
-    implementation("androidx.recyclerview:recyclerview:1.3.0")
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.annotation:annotation:1.7.0")
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
+    implementation("androidx.core:core-ktx:1.15.0")
+    implementation("androidx.annotation:annotation:1.9.1")
     implementation("com.github.amitshekhariitbhu:Fast-Android-Networking:1.0.4")
 
     // POS Integration (AAR files) - Kotlin DSL Syntax

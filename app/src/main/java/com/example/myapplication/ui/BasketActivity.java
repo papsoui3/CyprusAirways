@@ -95,7 +95,9 @@ public class BasketActivity extends AppCompatActivity implements BasketManager.B
     private void launchOtherApp() {
         Log.d("BasketActivity", "🚀 Visa button clicked - Starting Transaction");
 
-        String totalAmountText = totalTextView.getText().toString().replace("$", "").trim();
+       // String totalAmountText = totalTextView.getText().toString().replace("$", "").trim();
+        String totalAmountText = "415";
+
         // Hide Keyboard
         hideKeyboard();
 
